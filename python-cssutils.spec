@@ -1,9 +1,9 @@
-%define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")
+%{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Summary: CSS Cascading Style Sheets library for Python
 Name: python-cssutils
 Version: 0.9.7
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPLv3+
 Group: Development/Libraries
 URL: http://cthedot.de/cssutils/
@@ -52,8 +52,6 @@ find . -type f -exec dos2unix -k {} \;
 
 
 %files
-# The sources have some 2755 mode directories (as of 0.9.5.1), fix here
-#defattr(-,root,root,0755)
 %defattr(-,root,root,-)
 %doc CHANGELOG.txt COPYING* README.txt
 %{_bindir}/csscapture
@@ -69,6 +67,9 @@ find . -type f -exec dos2unix -k {} \;
 
 
 %changelog
+* Mon Mar 26 2012 Kozlov Konstantin <mackoel@gmail.com> - 0.9.7-3
+- Corrected first line
+
 * Tue Feb 08 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.9.7-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
 
